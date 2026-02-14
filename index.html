@@ -196,14 +196,14 @@
         </div>
     </div>
 
-    <div id="touchControls">
+    <div id="touchControls" style="visibility:hidden">
         <div class="touch-btn" id="btnLeft">◀</div>
         <div class="touch-btn" id="btnRight">▶</div>
         <div class="touch-btn" id="btnGas">GAS</div>
         <div class="touch-btn" id="btnBrake">BRK</div>
         <div class="touch-btn" id="btnDrift">DRIFT</div>
     </div>
-    <div class="touch-btn" id="btnReset">R</div>
+    <div class="touch-btn" id="btnReset" style="visibility:hidden">R</div>
 
     <script>
     // ============================================================
@@ -482,6 +482,8 @@
 
     function startRace() {
         document.getElementById('startScreen').style.display = 'none';
+        document.getElementById('touchControls').style.visibility = 'visible';
+        document.getElementById('btnReset').style.visibility = 'visible';
         currentTrack = TRACKS[selectedTrack];
         initRace();
         gameState = 'countdown';
@@ -1263,6 +1265,8 @@
         // Check if enter pressed to restart
         if (gameState === 'finished' && keys['Enter']) {
             document.getElementById('startScreen').style.display = 'flex';
+            document.getElementById('touchControls').style.visibility = 'hidden';
+            document.getElementById('btnReset').style.visibility = 'hidden';
             gameState = 'menu';
         }
     }
