@@ -159,8 +159,8 @@
         #btnDrift { width: 65px; height: 65px; bottom: 10px; right: 15px; font-size: 12px; }
         #btnReset { width: 44px; height: 44px; top: 10px; right: 15px; font-size: 16px; position: fixed; z-index: 31; pointer-events: auto; border-radius: 50%; background: rgba(233,69,96,0.35); border: 2px solid rgba(233,69,96,0.6); color: #fff; display: none; justify-content: center; align-items: center; }
         @media (pointer: coarse), (max-width: 768px) {
-            #touchControls { display: block; }
-            #btnReset { display: flex; }
+            #touchControls.active { display: block; }
+            #btnReset.active { display: flex; }
             canvas#game { border: none; border-radius: 0; }
             body { overflow: hidden; }
             #minimap { bottom: 185px; }
@@ -196,14 +196,14 @@
         </div>
     </div>
 
-    <div id="touchControls" style="visibility:hidden">
+    <div id="touchControls">
         <div class="touch-btn" id="btnLeft">◀</div>
         <div class="touch-btn" id="btnRight">▶</div>
         <div class="touch-btn" id="btnGas">GAS</div>
         <div class="touch-btn" id="btnBrake">BRK</div>
         <div class="touch-btn" id="btnDrift">DRIFT</div>
     </div>
-    <div class="touch-btn" id="btnReset" style="visibility:hidden">R</div>
+    <div class="touch-btn" id="btnReset">R</div>
 
     <script>
     // ============================================================
@@ -482,8 +482,8 @@
 
     function startRace() {
         document.getElementById('startScreen').style.display = 'none';
-        document.getElementById('touchControls').style.visibility = 'visible';
-        document.getElementById('btnReset').style.visibility = 'visible';
+        document.getElementById('touchControls').classList.add('active');
+        document.getElementById('btnReset').classList.add('active');
         currentTrack = TRACKS[selectedTrack];
         initRace();
         gameState = 'countdown';
@@ -1265,8 +1265,8 @@
         // Check if enter pressed to restart
         if (gameState === 'finished' && keys['Enter']) {
             document.getElementById('startScreen').style.display = 'flex';
-            document.getElementById('touchControls').style.visibility = 'hidden';
-            document.getElementById('btnReset').style.visibility = 'hidden';
+            document.getElementById('touchControls').classList.remove('active');
+            document.getElementById('btnReset').classList.remove('active');
             gameState = 'menu';
         }
     }
